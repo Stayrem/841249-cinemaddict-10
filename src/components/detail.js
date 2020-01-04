@@ -1,3 +1,4 @@
+import {createElement} from "../utils";
 export const createDetail = (param) =>
   `<section class="film-details">
 <form class="film-details__inner" action="" method="get">
@@ -76,7 +77,7 @@ export const createDetail = (param) =>
 
   <div class="form-details__bottom-container">
     <section class="film-details__comments-wrap">
-      <h3 class="film-details__comments-title">Comments <span class="film-details__comments-count">${param.comments}</span></h3>
+      <h3 class="film-details__comments-title">Comments <span class="film-details__comments-count">${param.commentsCount}</span></h3>
 
       <ul class="film-details__comments-list">
        
@@ -115,3 +116,44 @@ export const createDetail = (param) =>
   </div>
 </form>
 </section>`;
+
+export default class Detail {
+  constructor(movie) {
+    this._element = null;
+    this._movie = movie;
+    this._clickHandler = this._clickHandler.bind(this);
+
+  }
+  getTemplate() {
+    return createDetail(this._movie);
+  }
+
+  getElement() {
+    if (!this._element) {
+      this._element = createElement(this.getTemplate());
+    }
+
+    return this._element;
+  }
+
+  _clickHandler() {
+    this.unmount();
+  }
+
+  subscribeClickListener() {
+    const closeDetail = this._element.querySelector(`.film-details__close-btn`);
+    closeDetail.addEventListener(`click`, this._clickHandler);
+  }
+
+  unsubscribeClickListener() {
+    this._element.removeEventListener(`click`, this._clickHandler);
+  }
+
+  removeElement() {
+    this._element = null;
+  }
+
+  unmount() {
+    this.getElement().remove();
+  }
+}

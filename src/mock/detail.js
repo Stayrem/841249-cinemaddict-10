@@ -91,13 +91,12 @@ const createFilmCard = () => {
     comments: commentCount
   };
 };
-
 export const generateFilmDetail = () => {
   let filmParams = createFilmCard();
   return createDetail(filmParams);
 };
 
-let currentComments = comments.slice(1, commentCount + 1);
+export let currentComments = comments.slice(1, commentCount + 1);
 
 export const generateComments = () => {
   return Object.values(currentComments)
