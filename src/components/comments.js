@@ -1,3 +1,5 @@
+import {createElement} from "../utils";
+
 export const createComments = (param) => `<li class="film-details__comment">
 <span class="film-details__comment-emoji">
   <img src="./images/emoji/smile.png" width="55" height="55" alt="emoji">
@@ -11,3 +13,36 @@ export const createComments = (param) => `<li class="film-details__comment">
   </p>
 </div>
 </li>`;
+
+export default class DetailComments {
+  constructor(items) {
+    this._items = items;
+    this._element = null;
+  }
+
+  getTemplate() {
+    return `<div>${this._getItemsTemplate()}</div>`;
+  }
+
+  _getItemsTemplate() {
+    return Object.values(this._items).map((item) => {
+      return createComments(item);
+    }).join(``);
+  }
+
+  getElement() {
+    if (!this._element) {
+      this._element = createElement(this.getTemplate());
+    }
+
+    return this._element;
+  }
+
+  removeElement() {
+    this._element = null;
+  }
+
+  unmount() {
+    this.getElement().remove();
+  }
+}

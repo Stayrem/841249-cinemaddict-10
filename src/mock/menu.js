@@ -1,8 +1,4 @@
-import {
-  createMenu
-} from "../components/menu";
-
-let menuItems = [
+export let menuItems = [
   {
     label: `All Movies`,
     id: `#all`,
@@ -21,9 +17,3 @@ let menuItems = [
     id: `favorites`
   }
 ];
-
-export const generateMenu = () => {
-  return Object.values(menuItems).map((it) => {
-    return createMenu(it);
-  }).join(``);
-};
