@@ -9,7 +9,7 @@ export default class SiteMenu {
   }
 
   getTemplate() {
-    return `<div>${this._getItemsTemplate()}</div>`;
+    return `<nav class="main-navigation" >${this._getItemsTemplate()}</nav>`;
   }
 
   _getItemsTemplate() {
