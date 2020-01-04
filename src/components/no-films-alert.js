@@ -1,17 +1,14 @@
 import {createElement} from "../utils";
 
-export const createUserStatus = () => `<section class="header__profile profile">
-<p class="profile__rating">Movie Buff</p>
-<img class="profile__avatar" src="images/bitmap@2x.png" alt="Avatar" width="35" height="35">
-</section>`;
+export const createNoFilmsAlert = () => `<h2 class="films-list__title">There are no movies in our database</h2>`;
 
-export default class UserStatus {
+export default class NoFilmsAlert {
   constructor() {
     this._element = null;
   }
 
   getTemplate() {
-    return createUserStatus();
+    return createNoFilmsAlert();
   }
 
   getElement() {

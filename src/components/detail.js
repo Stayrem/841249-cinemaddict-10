@@ -1,4 +1,5 @@
 import {createElement} from "../utils";
+import {ESC_KEY_CODE} from "../constants";
 export const createDetail = (param) =>
   `<section class="film-details">
 <form class="film-details__inner" action="" method="get">
@@ -136,13 +137,19 @@ export default class Detail {
     return this._element;
   }
 
-  _clickHandler() {
+  _clickHandler(evt) {
+    let code = evt || window.event;
+    if (code === ESC_KEY_CODE) {
+      this.unmount();
+    }
     this.unmount();
   }
 
   subscribeClickListener() {
     const closeDetail = this._element.querySelector(`.film-details__close-btn`);
+
     closeDetail.addEventListener(`click`, this._clickHandler);
+    document.addEventListener(`keydown`, this._clickHandler);
   }
 
   unsubscribeClickListener() {
