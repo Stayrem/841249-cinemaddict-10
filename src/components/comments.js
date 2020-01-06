@@ -1,4 +1,4 @@
-import {createElement} from "../utils";
+import AbstractComponent from './abstract-component.js';
 
 export const createComments = (param) => `<li class="film-details__comment">
 <span class="film-details__comment-emoji">
@@ -14,8 +14,9 @@ export const createComments = (param) => `<li class="film-details__comment">
 </div>
 </li>`;
 
-export default class DetailComments {
+export default class DetailComments extends AbstractComponent {
   constructor(items) {
+    super();
     this._items = items;
     this._element = null;
   }
@@ -28,21 +29,5 @@ export default class DetailComments {
     return Object.values(this._items).map((item) => {
       return createComments(item);
     }).join(``);
-  }
-
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate());
-    }
-
-    return this._element;
-  }
-
-  removeElement() {
-    this._element = null;
-  }
-
-  unmount() {
-    this.getElement().remove();
   }
 }
