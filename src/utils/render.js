@@ -1,6 +1,7 @@
 export const RenderPosition = {
   AFTERBEGIN: `afterbegin`,
-  BEFOREEND: `beforeend`
+  BEFOREEND: `beforeend`,
+  INSERTBEFORE: `insertBefore`
 };
 
 export const createElement = (template) => {
