@@ -1,5 +1,5 @@
 import {RenderPosition, render} from "./utils";
-import PageController from "./controller/PageController";
+import PageController from "./controllers/PageController";
 import Page from "./components/page";
 import UserStatus from "./components/user-status";
 
