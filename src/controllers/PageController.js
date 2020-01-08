@@ -55,7 +55,7 @@ export default class PageController {
     let target = evt.target;
     const sortButtons = document.querySelectorAll(`.sort__button`);
     sortButtons.forEach((button) => button.classList.remove(`sort__button--active`));
-    target.classList.add(`sort__button--active`)
+    target.classList.add(`sort__button--active`);
     if (target.classList.contains(`sort__button--byrating`)) {
       let sortedByRaitingFilms = sortByRaiting(this._movies);
       this._moviesComponent.renderMoviesComponents(sortedByRaitingFilms.slice(0, this._counter));
