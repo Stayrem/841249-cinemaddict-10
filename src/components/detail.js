@@ -1,5 +1,6 @@
-import {createElement} from "../utils";
 import {ESC_KEY_CODE} from "../constants";
+import AbstractComponent from './abstract-component.js';
+
 export const createDetail = (param) =>
   `<section class="film-details">
 <form class="film-details__inner" action="" method="get">
@@ -118,8 +119,9 @@ export const createDetail = (param) =>
 </form>
 </section>`;
 
-export default class Detail {
+export default class Detail extends AbstractComponent {
   constructor(movie) {
+    super();
     this._element = null;
     this._movie = movie;
     this._clickHandler = this._clickHandler.bind(this);
@@ -127,14 +129,6 @@ export default class Detail {
   }
   getTemplate() {
     return createDetail(this._movie);
-  }
-
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate());
-    }
-
-    return this._element;
   }
 
   _clickHandler(evt) {
@@ -154,13 +148,5 @@ export default class Detail {
 
   unsubscribeClickListener() {
     this._element.removeEventListener(`click`, this._clickHandler);
-  }
-
-  removeElement() {
-    this._element = null;
-  }
-
-  unmount() {
-    this.getElement().remove();
   }
 }

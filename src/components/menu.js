@@ -1,11 +1,16 @@
-import {createElement} from '../utils.js';
+import AbstractComponent from './abstract-component.js';
 
 export const createMenu = (param) => `<a href="${param.id}" class="main-navigation__item ${param.className}">${param.label}</a>`;
 
-export default class SiteMenu {
+export default class SiteMenu extends AbstractComponent {
   constructor(items) {
+    super();
     this._items = items;
     this._element = null;
+  }
+
+  getTemplate() {
+    return `<nav class="main-navigation" >${this._getItemsTemplate()}</nav>`;
   }
 
   getTemplate() {
@@ -16,21 +21,5 @@ export default class SiteMenu {
     return Object.values(this._items).map((item) => {
       return createMenu(item);
     }).join(``);
-  }
-
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate());
-    }
-
-    return this._element;
-  }
-
-  removeElement() {
-    this._element = null;
-  }
-
-  unmount() {
-    this.getElement().remove();
   }
 }

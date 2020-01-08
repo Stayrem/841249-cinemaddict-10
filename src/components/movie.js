@@ -1,8 +1,17 @@
-import {createElement, render, RenderPosition} from '../utils.js';
+import {
+  render,
+  RenderPosition
+} from '../utils.js';
 import Detail from './detail';
 import DetailComments from './comments';
-import {currentComments} from '../mock/detail';
-import {detailContainer} from '../main';
+import {
+  currentComments
+} from '../mock/detail';
+import {
+  detailContainer
+} from '../main';
+import AbstractComponent from './abstract-component.js';
+
 export const createMovie = (param) => `<article class="film-card">
 <h3 class="film-card__title">${param.title}</h3>
 <p class="film-card__rating">${param.rating}</p>
@@ -21,8 +30,9 @@ export const createMovie = (param) => `<article class="film-card">
 </form>
 </article>`;
 
-export default class Movie {
+export default class Movie extends AbstractComponent {
   constructor(data) {
+    super();
     this._data = data;
     this._element = null;
     this._clickHandler = this._clickHandler.bind(this);
@@ -30,14 +40,6 @@ export default class Movie {
 
   getTemplate() {
     return createMovie(this._data);
-  }
-
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate());
-
-    }
-    return this._element;
   }
 
   _clickHandler() {
@@ -57,13 +59,5 @@ export default class Movie {
 
   unsubscribeClickListener() {
     this._element.removeEventListener(`click`, this._clickHandler);
-  }
-
-  removeElement() {
-    this._element = null;
-  }
-
-  unmount() {
-    this.getElement().remove();
   }
 }

@@ -26,6 +26,13 @@ export default class SiteSort {
     return this._element;
   }
 
+  subscribeClickListener(listener) {
+    this.getElement().querySelector(`.sort__button--bydefault`).addEventListener(`click`, listener);
+    this.getElement().querySelector(`.sort__button--bydate`).addEventListener(`click`, listener);
+    this.getElement().querySelector(`.sort__button--byrating`).addEventListener(`click`, listener);
+
+  }
+
   removeElement() {
     this._element = null;
   }
